@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Widget> tabs = [
-   const TrendingMovies(),
+    const TrendingMovies(),
     Expanded(
       child: Container(
         color: Colors.blue,
