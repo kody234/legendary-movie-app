@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/data/api_service.dart';
+import 'package:movie_app/ui/movie_detail.dart';
 
 import 'movie_card.dart';
 
@@ -30,9 +31,20 @@ class _TrendingMoviesState extends State<TrendingMovies> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ListView.separated(
                     itemBuilder: (context, index) {
-                      return MovieCard(
-                        snapshot: snapshot,
-                        index: index,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => MovieDetail(
+                                        snapshot: snapshot,
+                                        index: index,
+                                      )));
+                        },
+                        child: MovieCard(
+                          snapshot: snapshot,
+                          index: index,
+                        ),
                       );
                     },
                     separatorBuilder: (context, index) {
