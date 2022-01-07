@@ -37,7 +37,7 @@ class _TrendingMoviesState extends State<TrendingMovies> {
                               context,
                               MaterialPageRoute(
                                   builder: (_) => MovieDetail(
-                                        snapshot: snapshot,
+                                        firstSnapshot: snapshot,
                                         index: index,
                                       )));
                         },
