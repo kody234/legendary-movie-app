@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/component/search_card.dart';
 import 'package:movie_app/component/trending_column.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,17 +42,13 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Icon(
                     Icons.menu,
                     size: 38,
                     color: Color(0xFF12153D),
                   ),
-                  Icon(
-                    Icons.search,
-                    size: 32,
-                    color: Color(0xFF12153D),
-                  )
+                  Expanded(child: SearchCard())
                 ],
               ),
             ),
