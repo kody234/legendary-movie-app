@@ -7,12 +7,19 @@ class CastGrid extends StatelessWidget {
   }) : super(key: key);
   final AsyncSnapshot<List?> snapshot;
 
+  int length() {
+    if (snapshot.data!.length > 9) {
+      return 9;
+    }
+    return snapshot.data!.length;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: snapshot.data!.length,
+        itemCount: length(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3, mainAxisSpacing: 30, crossAxisSpacing: 10),
         itemBuilder: (context, index) {
