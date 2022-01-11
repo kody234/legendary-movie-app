@@ -13,7 +13,7 @@ class RatingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 180,
+      top: 200,
       height: 109,
       width: MediaQuery.of(context).size.width,
       child: Container(

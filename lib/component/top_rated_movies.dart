@@ -4,20 +4,20 @@ import 'package:movie_app/ui/movie_detail.dart';
 
 import 'movie_card.dart';
 
-class TrendingMovies extends StatefulWidget {
-  const TrendingMovies({Key? key}) : super(key: key);
+class TopRatedMovies extends StatefulWidget {
+  const TopRatedMovies({Key? key}) : super(key: key);
 
   @override
-  _TrendingMoviesState createState() => _TrendingMoviesState();
+  _TopRatedMoviesState createState() => _TopRatedMoviesState();
 }
 
-class _TrendingMoviesState extends State<TrendingMovies> {
+class _TopRatedMoviesState extends State<TopRatedMovies> {
   Future<List?>? future = null;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    future = ApiService().getTrendingMovies();
+    future = ApiService().getTopRatedMovies();
   }
 
   @override

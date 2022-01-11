@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/component/movie_card.dart';
 import 'package:movie_app/data/api_service.dart';
+import 'package:movie_app/ui/movie_detail.dart';
 
 class SearchedMovies extends StatefulWidget {
   const SearchedMovies({Key? key, required this.query}) : super(key: key);
@@ -62,8 +63,18 @@ class _SearchedMoviesState extends State<SearchedMovies> {
                       Expanded(
                         child: ListView.separated(
                             itemBuilder: (context, index) {
-                              return MovieCard(
-                                  snapshot: snapshot, index: index);
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => MovieDetail(
+                                              firstSnapshot: snapshot,
+                                              index: index)));
+                                },
+                                child:
+                                    MovieCard(snapshot: snapshot, index: index),
+                              );
                             },
                             separatorBuilder: (context, index) {
                               return const SizedBox(
