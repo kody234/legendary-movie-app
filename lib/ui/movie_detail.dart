@@ -1,11 +1,10 @@
-import 'dart:convert';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:movie_app/component/cast_grid.dart';
 import 'package:movie_app/component/rating_card.dart';
+import 'package:movie_app/data/api_service.dart';
 
-class MovieDetail extends StatelessWidget {
+class MovieDetail extends StatefulWidget {
   const MovieDetail({
     Key? key,
     required this.firstSnapshot,
@@ -15,19 +14,20 @@ class MovieDetail extends StatelessWidget {
   final AsyncSnapshot firstSnapshot;
   final int index;
 
-  Future<List?> getCast(int movieId) async {
-    http.Response apiResponse = await http.get(Uri.parse(
-        'https://api.themoviedb.org/3/movie/$movieId/credits?api_key=79ce9c64e2645e9baff2e363b9869940&language=en-US'));
-    try {
-      if (apiResponse.statusCode == 200) {
-        var response = apiResponse.body;
-        var body = jsonDecode(response);
-        print('Cast $body');
-        return body['cast'];
-      }
-    } catch (e) {
-      print('Exception $e');
-    }
+  @override
+  State<MovieDetail> createState() => _MovieDetailState();
+}
+
+class _MovieDetailState extends State<MovieDetail> {
+  Future<List?>? future = null;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    future =
+        ApiService().getCast(widget.firstSnapshot.data[widget.index]['id']);
   }
 
   @override
@@ -35,7 +35,7 @@ class MovieDetail extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         body: FutureBuilder<List?>(
-          future: getCast(firstSnapshot.data[index]['id']),
+          future: future,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Stack(
@@ -44,15 +44,22 @@ class MovieDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
-                        borderRadius:
-                            BorderRadius.only(bottomLeft: Radius.circular(50)),
-                        child: Image(
-                          image: NetworkImage(
-                              'http://image.tmdb.org/t/p/original${firstSnapshot.data![index]['backdrop_path']}'),
-                        ),
-                      ),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(50)),
+                          child: CachedNetworkImage(
+                            errorWidget: (context, string, d) =>
+                                Icon(Icons.image_not_supported),
+                            placeholder: (context, url) => Center(
+                              child: Icon(Icons.image_sharp),
+                            ),
+                            imageUrl:
+                                'http://image.tmdb.org/t/p/original${widget.firstSnapshot.data![widget.index]['backdrop_path']}',
+                            height: 275,
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.cover,
+                          )),
                       SizedBox(
-                        height: 60,
+                        height: 40,
                       ),
                       Flexible(
                         child: ListView(
@@ -66,8 +73,10 @@ class MovieDetail extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      firstSnapshot.data![index]['title'] ??
-                                          firstSnapshot.data![index]
+                                      widget.firstSnapshot.data![widget.index]
+                                              ['title'] ??
+                                          widget.firstSnapshot
+                                                  .data![widget.index]
                                               ['original_name'],
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
@@ -79,7 +88,7 @@ class MovieDetail extends StatelessWidget {
                                       height: 8,
                                     ),
                                     Text(
-                                      'Release Date: ${firstSnapshot.data![index]['release_date']}',
+                                      'Release Date: ${widget.firstSnapshot.data![widget.index]['release_date']}',
                                       softWrap: false,
                                       style: const TextStyle(
                                           color: Color(0xFF9A9BB2),
@@ -101,7 +110,8 @@ class MovieDetail extends StatelessWidget {
                                       height: 16,
                                     ),
                                     Text(
-                                      firstSnapshot.data![index]['overview'],
+                                      widget.firstSnapshot.data![widget.index]
+                                          ['overview'],
                                       style: const TextStyle(
                                           color: Color(0xFF737599),
                                           fontWeight: FontWeight.w600,
@@ -129,7 +139,8 @@ class MovieDetail extends StatelessWidget {
                       )
                     ],
                   ),
-                  RatingCard(snapshot: firstSnapshot, index: index),
+                  RatingCard(
+                      snapshot: widget.firstSnapshot, index: widget.index),
                 ],
               );
             }

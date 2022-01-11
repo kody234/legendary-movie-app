@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CastGrid extends StatelessWidget {
@@ -28,8 +29,9 @@ class CastGrid extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 40,
-                backgroundImage: NetworkImage(
-                    'http://image.tmdb.org/t/p/original${snapshot.data![index]['profile_path']}'),
+                backgroundImage: CachedNetworkImageProvider(
+                  'http://image.tmdb.org/t/p/original${snapshot.data![index]['profile_path']}',
+                ),
               ),
               Expanded(
                 child: Text(
