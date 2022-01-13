@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/component/movie_card.dart';
 import 'package:movie_app/data/api_service.dart';
 import 'package:movie_app/ui/movie_detail.dart';
+import 'package:movie_app/widgets/movie_card.dart';
 
 class SearchedMovies extends StatefulWidget {
   const SearchedMovies({Key? key, required this.query}) : super(key: key);
@@ -69,7 +69,7 @@ class _SearchedMoviesState extends State<SearchedMovies> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (_) => MovieDetail(
-                                              firstSnapshot: snapshot,
+                                              movieSnapshot: snapshot,
                                               index: index)));
                                 },
                                 child:

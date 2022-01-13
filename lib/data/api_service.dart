@@ -77,4 +77,46 @@ class ApiService {
       print('Exception $e');
     }
   }
+
+  Future<List?> getMovieReviews(int movieId) async {
+    http.Response apiResponse = await http.get(Uri.parse(
+        'https://api.themoviedb.org/3/movie/$movieId/reviews?api_key=79ce9c64e2645e9baff2e363b9869940&language=en-US&page=1'));
+
+    try {
+      if (apiResponse.statusCode == 200) {
+        print('StatusCoded ${apiResponse.statusCode}');
+        var response = apiResponse.body;
+        var body = jsonDecode(response);
+        print('Body $body');
+        List data = body['results'];
+
+        return data;
+      }
+      return null;
+    } catch (e) {
+      print('Exception $e');
+      return null;
+    }
+  }
+
+  Future<List?> getReccommendedMovies(int movieId) async {
+    http.Response apiResponse = await http.get(Uri.parse(
+        'https://api.themoviedb.org/3/movie/$movieId/similar?api_key=79ce9c64e2645e9baff2e363b9869940&language=en-US&page=1'));
+
+    try {
+      if (apiResponse.statusCode == 200) {
+        print('StatusCoded ${apiResponse.statusCode}');
+        var response = apiResponse.body;
+        var body = jsonDecode(response);
+        print('Body $body');
+        List data = body['results'];
+
+        return data;
+      }
+      return null;
+    } catch (e) {
+      print('Exception $e');
+      return null;
+    }
+  }
 }

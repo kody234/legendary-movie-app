@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/ui/reviews_page.dart';
 
 class RatingCard extends StatelessWidget {
   const RatingCard({
@@ -70,24 +71,23 @@ class RatingCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
-                children: [
-                  Container(
-                    height: 40,
-                    width: 40,
-                    color: Colors.green,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'MetaScore',
-                    style: const TextStyle(
-                        color: Color(0xFF12153D),
-                        fontWeight: FontWeight.w800,
-                        fontSize: 17),
-                  ),
-                ],
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => ReviewPage(
+                                index: index,
+                                movieSnapshot: snapshot,
+                              )));
+                },
+                child: Text(
+                  'Reviews >',
+                  style: const TextStyle(
+                      color: Color(0xFF12153D),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 19),
+                ),
               )
             ],
           ),
