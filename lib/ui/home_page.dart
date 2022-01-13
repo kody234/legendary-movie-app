@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/component/custom_drawer.dart';
-import 'package:movie_app/component/search_card.dart';
 import 'package:movie_app/component/top_rated_movies.dart';
 import 'package:movie_app/component/trending_column.dart';
+import 'package:movie_app/widgets/custom_drawer.dart';
+import 'package:movie_app/widgets/search_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

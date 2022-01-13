@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/data/api_service.dart';
 import 'package:movie_app/ui/movie_detail.dart';
 
-import 'movie_card.dart';
+import '../widgets/movie_card.dart';
 
 class TrendingMovies extends StatefulWidget {
   const TrendingMovies({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class _TrendingMoviesState extends State<TrendingMovies> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => MovieDetail(
-                                          firstSnapshot: snapshot,
+                                          movieSnapshot: snapshot,
                                           index: index,
                                         )));
                           },

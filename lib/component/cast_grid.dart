@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/widgets/circle_avatar.dart';
 
 class CastGrid extends StatelessWidget {
   const CastGrid({
@@ -27,11 +27,11 @@ class CastGrid extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 40,
-                backgroundImage: CachedNetworkImageProvider(
-                  'http://image.tmdb.org/t/p/original${snapshot.data![index]['profile_path']}',
-                ),
+              CustomcCircleAvatar(
+                snapshot: snapshot,
+                index: index,
+                url:
+                    'http://image.tmdb.org/t/p/original${snapshot.data![index]['profile_path']}',
               ),
               Expanded(
                 child: Text(
@@ -43,9 +43,6 @@ class CastGrid extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       fontSize: 16),
                 ),
-              ),
-              SizedBox(
-                height: 10,
               ),
               Expanded(
                 child: Text(

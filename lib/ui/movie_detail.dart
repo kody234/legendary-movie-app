@@ -1,17 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/component/cast_grid.dart';
 import 'package:movie_app/component/rating_card.dart';
+import 'package:movie_app/component/reccommended_movies.dart';
 import 'package:movie_app/data/api_service.dart';
 
 class MovieDetail extends StatefulWidget {
   const MovieDetail({
     Key? key,
-    required this.firstSnapshot,
+    required this.movieSnapshot,
     required this.index,
   }) : super(key: key);
 
-  final AsyncSnapshot firstSnapshot;
+  final AsyncSnapshot movieSnapshot;
   final int index;
 
   @override
@@ -20,6 +22,7 @@ class MovieDetail extends StatefulWidget {
 
 class _MovieDetailState extends State<MovieDetail> {
   Future<List?>? future = null;
+  Future<List?>? future2 = null;
 
   @override
   void initState() {
@@ -27,7 +30,10 @@ class _MovieDetailState extends State<MovieDetail> {
     super.initState();
 
     future =
-        ApiService().getCast(widget.firstSnapshot.data[widget.index]['id']);
+        ApiService().getCast(widget.movieSnapshot.data[widget.index]['id']);
+
+    future2 = ApiService()
+        .getReccommendedMovies(widget.movieSnapshot.data[widget.index]['id']);
   }
 
   @override
@@ -53,7 +59,7 @@ class _MovieDetailState extends State<MovieDetail> {
                               child: Icon(Icons.image_sharp),
                             ),
                             imageUrl:
-                                'http://image.tmdb.org/t/p/original${widget.firstSnapshot.data![widget.index]['backdrop_path']}',
+                                'http://image.tmdb.org/t/p/original${widget.movieSnapshot.data![widget.index]['backdrop_path']}',
                             height: 275,
                             width: MediaQuery.of(context).size.width,
                             fit: BoxFit.cover,
@@ -62,20 +68,19 @@ class _MovieDetailState extends State<MovieDetail> {
                         height: 40,
                       ),
                       Flexible(
-                        child: ListView(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 32),
-                                child: Column(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 32),
+                          child: ListView(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              children: [
+                                Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      widget.firstSnapshot.data![widget.index]
+                                      widget.movieSnapshot.data![widget.index]
                                               ['title'] ??
-                                          widget.firstSnapshot
+                                          widget.movieSnapshot
                                                   .data![widget.index]
                                               ['original_name'],
                                       textAlign: TextAlign.center,
@@ -88,7 +93,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                       height: 8,
                                     ),
                                     Text(
-                                      'Release Date: ${widget.firstSnapshot.data![widget.index]['release_date']}',
+                                      'Release Date: ${widget.movieSnapshot.data![widget.index]['release_date']}',
                                       softWrap: false,
                                       style: const TextStyle(
                                           color: Color(0xFF9A9BB2),
@@ -110,7 +115,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                       height: 16,
                                     ),
                                     Text(
-                                      widget.firstSnapshot.data![widget.index]
+                                      widget.movieSnapshot.data![widget.index]
                                           ['overview'],
                                       style: const TextStyle(
                                           color: Color(0xFF737599),
@@ -122,10 +127,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                     ),
                                   ],
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 32),
-                                child: Text(
+                                Text(
                                   'Cast & crew',
                                   overflow: TextOverflow.fade,
                                   style: const TextStyle(
@@ -133,14 +135,34 @@ class _MovieDetailState extends State<MovieDetail> {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 24),
                                 ),
-                              ),
-                              CastGrid(snapshot: snapshot)
-                            ]),
+                                CastGrid(snapshot: snapshot),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'Recommendations',
+                                  overflow: TextOverflow.fade,
+                                  style: const TextStyle(
+                                      color: Color(0xFF12153D),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 24),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                ReccommendedMovies(
+                                  future2: future2,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                )
+                              ]),
+                        ),
                       )
                     ],
                   ),
                   RatingCard(
-                      snapshot: widget.firstSnapshot, index: widget.index),
+                      snapshot: widget.movieSnapshot, index: widget.index),
                 ],
               );
             }

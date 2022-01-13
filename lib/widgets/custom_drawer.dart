@@ -17,7 +17,7 @@ class CustomDrawer extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage('asset/images/movieAsset.jpeg'))),
+                    image: AssetImage('assets/images/movieAsset.jpeg'))),
             child: null,
           ),
           ListTile(
