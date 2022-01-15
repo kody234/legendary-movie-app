@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/reviews_page.dart';
+import 'package:provider/provider.dart';
+
+import '../view_layer.dart';
 
 class RatingCard extends StatelessWidget {
   const RatingCard({
@@ -13,6 +16,7 @@ class RatingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ViewLayer provider = Provider.of<ViewLayer>(context, listen: false);
     return Positioned(
       top: 200,
       height: 109,
@@ -21,7 +25,7 @@ class RatingCard extends StatelessWidget {
         margin: EdgeInsets.only(left: 20),
         height: 109,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: provider.containerColor,
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(50), bottomLeft: Radius.circular(50)),
           boxShadow: [
@@ -47,13 +51,8 @@ class RatingCard extends StatelessWidget {
                     color: Color(0xFFcea200),
                     size: 45,
                   ),
-                  Text(
-                    ' ${snapshot.data![index]['vote_average']}/10',
-                    style: const TextStyle(
-                        color: Color(0xFF737599),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 17),
-                  ),
+                  Text(' ${snapshot.data![index]['vote_average']}/10',
+                      style: Theme.of(context).textTheme.headline3),
                 ],
               ),
               Column(
@@ -62,13 +61,8 @@ class RatingCard extends StatelessWidget {
                     Icons.star_outline_outlined,
                     size: 45,
                   ),
-                  Text(
-                    'Rate This',
-                    style: const TextStyle(
-                        color: Color(0xFF12153D),
-                        fontWeight: FontWeight.w800,
-                        fontSize: 17),
-                  ),
+                  Text('Rate This',
+                      style: Theme.of(context).textTheme.headline5),
                 ],
               ),
               GestureDetector(
@@ -81,13 +75,8 @@ class RatingCard extends StatelessWidget {
                                 movieSnapshot: snapshot,
                               )));
                 },
-                child: Text(
-                  'Reviews >',
-                  style: const TextStyle(
-                      color: Color(0xFF12153D),
-                      fontWeight: FontWeight.w800,
-                      fontSize: 19),
-                ),
+                child: Text('Reviews >',
+                    style: Theme.of(context).textTheme.headline5),
               )
             ],
           ),

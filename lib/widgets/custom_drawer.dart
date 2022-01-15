@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/view_layer.dart';
+import 'package:provider/provider.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
   const CustomDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
+  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +26,7 @@ class CustomDrawer extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage('assets/images/movieAsset.jpeg'))),
+                    image: AssetImage('asset/images/movieAsset.jpeg'))),
             child: null,
           ),
           ListTile(
@@ -34,6 +43,16 @@ class CustomDrawer extends StatelessWidget {
               // ...
             },
           ),
+          Switch(
+              value: isSwitched,
+              onChanged: (value) {
+                Provider.of<ViewLayer>(context, listen: false).themeSwitched();
+
+                setState(() {
+                  isSwitched = value;
+                  print(isSwitched);
+                });
+              })
         ],
       ),
     );

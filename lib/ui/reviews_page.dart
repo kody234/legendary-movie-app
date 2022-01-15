@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/data/api_service.dart';
 import 'package:movie_app/widgets/circle_avatar.dart';
+import 'package:provider/provider.dart';
+
+import '../view_layer.dart';
 
 class ReviewPage extends StatefulWidget {
   const ReviewPage({Key? key, required this.movieSnapshot, required this.index})
@@ -27,6 +30,7 @@ class _ReviewPageState extends State<ReviewPage> {
 
   @override
   Widget build(BuildContext context) {
+    ViewLayer provider = Provider.of<ViewLayer>(context, listen: false);
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder<List?>(
@@ -46,7 +50,7 @@ class _ReviewPageState extends State<ReviewPage> {
                             return Container(
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: provider.containerColor,
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey
@@ -87,26 +91,21 @@ class _ReviewPageState extends State<ReviewPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'A review by ${snapshot.data![index]['author']}',
-                                        softWrap: true,
-                                        overflow: TextOverflow.fade,
-                                        style: const TextStyle(
-                                            color: Color(0xFF12153D),
-                                            fontWeight: FontWeight.w800,
-                                            fontSize: 20),
-                                      ),
+                                          'A review by ${snapshot.data![index]['author']}',
+                                          softWrap: true,
+                                          overflow: TextOverflow.fade,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline1),
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Text(
-                                        snapshot.data![index]['content'],
-                                        softWrap: true,
-                                        overflow: TextOverflow.clip,
-                                        style: const TextStyle(
-                                            color: Color(0xFF12153D),
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 15),
-                                      ),
+                                      Text(snapshot.data![index]['content'],
+                                          softWrap: true,
+                                          overflow: TextOverflow.clip,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline1),
                                     ],
                                   )
                                 ],

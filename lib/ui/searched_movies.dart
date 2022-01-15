@@ -52,10 +52,7 @@ class _SearchedMoviesState extends State<SearchedMovies> {
                       Text(
                         'Results for ${widget.query}',
                         softWrap: false,
-                        style: const TextStyle(
-                            color: Color(0xFF12153D),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 26),
+                        style: Theme.of(context).textTheme.headline4,
                       ),
                       SizedBox(
                         height: 20,

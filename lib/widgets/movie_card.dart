@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../view_layer.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({
@@ -11,11 +14,12 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ViewLayer provider = Provider.of<ViewLayer>(context, listen: false);
     return Container(
       height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
+        color: provider.containerColor,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5), //color of shadow
@@ -47,13 +51,9 @@ class MovieCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    snapshot.data![index]['title'] ??
-                        snapshot.data![index]['original_name'],
-                    style: const TextStyle(
-                        color: Color(0xFF12153D),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 17),
-                  )
+                      snapshot.data![index]['title'] ??
+                          snapshot.data![index]['original_name'],
+                      style: Theme.of(context).textTheme.headline1)
                 ],
               ),
             ),

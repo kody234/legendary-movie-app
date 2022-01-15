@@ -38,19 +38,13 @@ class CastGrid extends StatelessWidget {
                   snapshot.data![index]['name'] ??
                       snapshot.data![index]['original_name'],
                   overflow: TextOverflow.fade,
-                  style: const TextStyle(
-                      color: Color(0xFF12153D),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16),
+                  style: Theme.of(context).textTheme.headline1
                 ),
               ),
               Expanded(
                 child: Text(
                   snapshot.data![index]['character'],
-                  style: const TextStyle(
-                      color: Color(0xFF12153D),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16),
+                  style: Theme.of(context).textTheme.headline1
                 ),
               ),
             ],
