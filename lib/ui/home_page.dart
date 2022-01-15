@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/component/top_rated_movies.dart';
 import 'package:movie_app/component/trending_column.dart';
+import 'package:movie_app/view_layer.dart';
 import 'package:movie_app/widgets/custom_drawer.dart';
 import 'package:movie_app/widgets/search_card.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Color textColor = Color(0xFF12153D);
   int currentTab = 0;
 
   void tabClicked(int index) {
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ViewLayer provider = Provider.of<ViewLayer>(context, listen: false);
     return GestureDetector(
       onTap: () {
         final FocusScopeNode currentScope = FocusScope.of(context);
@@ -50,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                       return IconButton(
                         iconSize: 38,
                         icon: Icon(Icons.menu),
-                        color: Color(0xFF12153D),
+                        color: provider.textColor,
                         onPressed: () {
                           Scaffold.of(context).openDrawer();
                         },
@@ -76,8 +78,8 @@ class _HomePageState extends State<HomePage> {
                           'Trending',
                           style: TextStyle(
                               color: currentTab == 0
-                                  ? textColor
-                                  : textColor.withOpacity(0.3),
+                                  ? provider.textColor
+                                  : provider.textColor.withOpacity(0.3),
                               fontWeight: FontWeight.w600,
                               fontSize: 32),
                         )),
@@ -92,8 +94,8 @@ class _HomePageState extends State<HomePage> {
                           'Top Rated',
                           style: TextStyle(
                               color: currentTab == 1
-                                  ? textColor
-                                  : textColor.withOpacity(0.3),
+                                  ? provider.textColor
+                                  : provider.textColor.withOpacity(0.3),
                               fontWeight: FontWeight.w600,
                               fontSize: 32),
                         ))
