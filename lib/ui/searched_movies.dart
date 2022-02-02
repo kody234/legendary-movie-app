@@ -3,6 +3,8 @@ import 'package:movie_app/data/api_service.dart';
 import 'package:movie_app/ui/movie_detail.dart';
 import 'package:movie_app/widgets/movie_card.dart';
 
+import '../size_config.dart';
+
 class SearchedMovies extends StatefulWidget {
   const SearchedMovies({Key? key, required this.query}) : super(key: key);
 
@@ -31,12 +33,13 @@ class _SearchedMoviesState extends State<SearchedMovies> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 5 * SizeConfig.widthMultiplier!),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 10,
+                        height: 1.5 * SizeConfig.heightMultiplier!,
                       ),
                       GestureDetector(
                           onTap: () {
@@ -44,10 +47,10 @@ class _SearchedMoviesState extends State<SearchedMovies> {
                           },
                           child: Icon(
                             Icons.chevron_left,
-                            size: 30,
+                            size: 7.5 * SizeConfig.widthMultiplier!,
                           )),
                       SizedBox(
-                        height: 40,
+                        height: 5.9 * SizeConfig.heightMultiplier!,
                       ),
                       Text(
                         'Results for ${widget.query}',
@@ -55,7 +58,7 @@ class _SearchedMoviesState extends State<SearchedMovies> {
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 5 * SizeConfig.heightMultiplier!,
                       ),
                       Expanded(
                         child: ListView.separated(
@@ -74,8 +77,8 @@ class _SearchedMoviesState extends State<SearchedMovies> {
                               );
                             },
                             separatorBuilder: (context, index) {
-                              return const SizedBox(
-                                height: 20,
+                              return SizedBox(
+                                height: 5 * SizeConfig.heightMultiplier!,
                               );
                             },
                             itemCount: snapshot.data!.length),

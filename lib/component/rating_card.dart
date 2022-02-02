@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/ui/reviews_page.dart';
 import 'package:provider/provider.dart';
 
+import '../size_config.dart';
 import '../view_layer.dart';
 
 class RatingCard extends StatelessWidget {
@@ -18,16 +18,17 @@ class RatingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     ViewLayer provider = Provider.of<ViewLayer>(context, listen: false);
     return Positioned(
-      top: 200,
-      height: 109,
+      top: 29.4 * SizeConfig.heightMultiplier!,
+      height: 16.02 * SizeConfig.heightMultiplier!,
       width: MediaQuery.of(context).size.width,
       child: Container(
-        margin: EdgeInsets.only(left: 20),
+        margin: EdgeInsets.only(left: 5 * SizeConfig.widthMultiplier!),
         height: 109,
         decoration: BoxDecoration(
           color: provider.containerColor,
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(50), bottomLeft: Radius.circular(50)),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(7.4 * SizeConfig.heightMultiplier!),
+              bottomLeft: Radius.circular(7.4 * SizeConfig.heightMultiplier!)),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5), //color of shadow
@@ -40,40 +41,26 @@ class RatingCard extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 21),
+          padding: EdgeInsets.symmetric(
+              horizontal: 12.2 * SizeConfig.widthMultiplier!,
+              vertical: 3.1 * SizeConfig.heightMultiplier!),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                children: [
-                  Icon(
-                    Icons.star,
-                    color: Color(0xFFcea200),
-                    size: 45,
-                  ),
-                  Text(' ${snapshot.data![index]['vote_average']}/10',
-                      style: Theme.of(context).textTheme.headline3),
-                ],
+              Center(
+                child: Text(' ${snapshot.data![index]['vote_average']}/10',
+                    style: Theme.of(context).textTheme.headline3),
               ),
-              Column(
-                children: [
-                  Icon(
-                    Icons.star_outline_outlined,
-                    size: 45,
-                  ),
-                  Text('Rate This',
-                      style: Theme.of(context).textTheme.headline5),
-                ],
-              ),
+              Text('Rate This', style: Theme.of(context).textTheme.headline5),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => ReviewPage(
-                                index: index,
-                                movieSnapshot: snapshot,
-                              )));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (_) => ReviewPage(
+                  //               index: index,
+                  //               movieSnapshot: snapshot,
+                  //             )));
                 },
                 child: Text('Reviews >',
                     style: Theme.of(context).textTheme.headline5),

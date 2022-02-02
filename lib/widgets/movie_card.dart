@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/size_config.dart';
 import 'package:provider/provider.dart';
 
 import '../view_layer.dart';
@@ -16,7 +17,7 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     ViewLayer provider = Provider.of<ViewLayer>(context, listen: false);
     return Container(
-      height: 200,
+      height: 29.4 * SizeConfig.heightMultiplier!,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: provider.containerColor,
@@ -36,7 +37,7 @@ class MovieCard extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              width: 100,
+              width: 21.2 * SizeConfig.widthMultiplier!,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.fill,
@@ -46,7 +47,9 @@ class MovieCard extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              padding: EdgeInsets.symmetric(
+                  horizontal: 3.7 * SizeConfig.widthMultiplier!,
+                  vertical: 2.2 * SizeConfig.heightMultiplier!),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
