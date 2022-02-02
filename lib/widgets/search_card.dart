@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/size_config.dart';
 import 'package:movie_app/ui/searched_movies.dart';
 
 class SearchCard extends StatefulWidget {
@@ -17,7 +18,7 @@ class _SearchCardState extends State<SearchCard> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(
-            Radius.circular(5.0),
+            Radius.circular(0.7 * SizeConfig.heightMultiplier!),
           ),
         ),
         child: TextField(
@@ -31,13 +32,14 @@ class _SearchCardState extends State<SearchCard> {
             FocusScope.of(context).unfocus();
           },
           style: TextStyle(
-            fontSize: 15.0,
+            fontSize: 2.2 * SizeConfig.textMultiplier!,
             color: Colors.black,
           ),
           decoration: InputDecoration(
             contentPadding: EdgeInsets.all(10.0),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius:
+                  BorderRadius.circular(0.7 * SizeConfig.heightMultiplier!),
               borderSide: BorderSide(
                 color: Colors.white,
               ),
@@ -46,7 +48,8 @@ class _SearchCardState extends State<SearchCard> {
               borderSide: BorderSide(
                 color: Colors.white,
               ),
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius:
+                  BorderRadius.circular(0.7 * SizeConfig.heightMultiplier!),
             ),
             hintText: "Search..",
             prefixIcon: GestureDetector(
@@ -68,7 +71,7 @@ class _SearchCardState extends State<SearchCard> {
               color: Colors.black,
             ),
             hintStyle: TextStyle(
-              fontSize: 15.0,
+              fontSize: 2.2 * SizeConfig.textMultiplier!,
               color: Colors.black,
             ),
           ),

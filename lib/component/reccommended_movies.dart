@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/movie_detail.dart';
 
+import '../size_config.dart';
+
 class ReccommendedMovies extends StatefulWidget {
   const ReccommendedMovies({
     Key? key,
@@ -28,7 +30,7 @@ class _ReccommendedMoviesState extends State<ReccommendedMovies> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return SizedBox(
-              height: 200,
+              height: 29.4 * SizeConfig.textMultiplier!,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   primary: false,
@@ -54,7 +56,7 @@ class _ReccommendedMoviesState extends State<ReccommendedMovies> {
                   },
                   separatorBuilder: (context, index) {
                     return SizedBox(
-                      width: 20,
+                      width: 5 * SizeConfig.widthMultiplier!,
                     );
                   },
                   itemCount: snapshot.data!.length),

@@ -6,6 +6,8 @@ import 'package:movie_app/component/rating_card.dart';
 import 'package:movie_app/component/reccommended_movies.dart';
 import 'package:movie_app/data/api_service.dart';
 
+import '../size_config.dart';
+
 class MovieDetail extends StatefulWidget {
   const MovieDetail({
     Key? key,
@@ -49,8 +51,9 @@ class _MovieDetailState extends State<MovieDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
-                      borderRadius:
-                          BorderRadius.only(bottomLeft: Radius.circular(50)),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(
+                              7.4 * SizeConfig.heightMultiplier!)),
                       child: CachedNetworkImage(
                         errorWidget: (context, string, d) =>
                             Icon(Icons.image_not_supported),
@@ -59,16 +62,17 @@ class _MovieDetailState extends State<MovieDetail> {
                         ),
                         imageUrl:
                             'http://image.tmdb.org/t/p/original${widget.movieSnapshot.data![widget.index]['backdrop_path']}',
-                        height: 275,
+                        height: 40.4 * SizeConfig.heightMultiplier!,
                         width: MediaQuery.of(context).size.width,
                         fit: BoxFit.cover,
                       )),
                   SizedBox(
-                    height: 40,
+                    height: 5.9 * SizeConfig.heightMultiplier!,
                   ),
                   Flexible(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 32),
+                      padding: EdgeInsets.only(
+                          left: 7.8 * SizeConfig.widthMultiplier!),
                       child: ListView(
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
@@ -84,38 +88,40 @@ class _MovieDetailState extends State<MovieDetail> {
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.headline2,
                                 ),
-                                const SizedBox(
-                                  height: 8,
+                                SizedBox(
+                                  height: 1.2 * SizeConfig.heightMultiplier!,
                                 ),
                                 Text(
                                   'Release Date: ${widget.movieSnapshot.data![widget.index]['release_date']}',
                                   softWrap: false,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: Color(0xFF9A9BB2),
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 16),
+                                      fontSize:
+                                          2.4 * SizeConfig.textMultiplier!),
                                 ),
-                                const SizedBox(
-                                  height: 70,
+                                SizedBox(
+                                  height: 10.3 * SizeConfig.heightMultiplier!,
                                 ),
-                                const Text(
+                                Text(
                                   'Plot Summary',
                                   softWrap: false,
-                                  style: const TextStyle(
-                                      color: Color(0xFF12153D),
+                                  style: TextStyle(
+                                      color: const Color(0xFF12153D),
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 24),
+                                      fontSize:
+                                          3.5 * SizeConfig.textMultiplier!),
                                 ),
-                                const SizedBox(
-                                  height: 16,
+                                SizedBox(
+                                  height: 2.4 * SizeConfig.heightMultiplier!,
                                 ),
                                 Text(
                                   widget.movieSnapshot.data![widget.index]
                                       ['overview'],
                                   style: Theme.of(context).textTheme.headline3,
                                 ),
-                                const SizedBox(
-                                  height: 40,
+                                SizedBox(
+                                  height: 5.9 * SizeConfig.heightMultiplier!,
                                 ),
                               ],
                             ),
@@ -124,19 +130,19 @@ class _MovieDetailState extends State<MovieDetail> {
                                 style: Theme.of(context).textTheme.headline4),
                             CastGrid(snapshot: snapshot),
                             SizedBox(
-                              height: 20,
+                              height: 2.9 * SizeConfig.heightMultiplier!,
                             ),
                             Text('Recommendations',
                                 overflow: TextOverflow.fade,
                                 style: Theme.of(context).textTheme.headline4),
                             SizedBox(
-                              height: 20,
+                              height: 2.9 * SizeConfig.heightMultiplier!,
                             ),
                             ReccommendedMovies(
                               future2: future2,
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 2.9 * SizeConfig.heightMultiplier!,
                             )
                           ]),
                     ),

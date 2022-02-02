@@ -6,6 +6,8 @@ import 'package:movie_app/widgets/custom_drawer.dart';
 import 'package:movie_app/widgets/search_card.dart';
 import 'package:provider/provider.dart';
 
+import '../size_config.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -40,17 +42,18 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 56,
+              SizedBox(
+                height: 8.2 * SizeConfig.heightMultiplier!,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(
+                    horizontal: 2.9 * SizeConfig.heightMultiplier!),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Builder(builder: (context) {
                       return IconButton(
-                        iconSize: 38,
+                        iconSize: 9.2 * SizeConfig.imageSizeMultiplier!,
                         icon: Icon(Icons.menu),
                         color: provider.textColor,
                         onPressed: () {
@@ -62,11 +65,11 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 48,
+              SizedBox(
+                height: 7 * SizeConfig.heightMultiplier!,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: EdgeInsets.only(left: 5 * SizeConfig.widthMultiplier!),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -81,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                                   ? provider.textColor
                                   : provider.textColor.withOpacity(0.3),
                               fontWeight: FontWeight.w600,
-                              fontSize: 32),
+                              fontSize: 4.7 * SizeConfig.textMultiplier!),
                         )),
                     const SizedBox(
                       width: 20,
@@ -97,13 +100,13 @@ class _HomePageState extends State<HomePage> {
                                   ? provider.textColor
                                   : provider.textColor.withOpacity(0.3),
                               fontWeight: FontWeight.w600,
-                              fontSize: 32),
+                              fontSize: 4.7 * SizeConfig.textMultiplier!),
                         ))
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: 3.7 * SizeConfig.heightMultiplier!,
               ),
               Container(
                 child: tabs[currentTab],

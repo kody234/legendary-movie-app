@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../size_config.dart';
+
 class CustomcCircleAvatar extends StatelessWidget {
   const CustomcCircleAvatar({
     Key? key,
@@ -18,12 +20,12 @@ class CustomcCircleAvatar extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(300),
       child: CachedNetworkImage(
-        height: 70,
-        width: 70,
+        height: 10.3 * SizeConfig.heightMultiplier!,
+        width: 17.1 * SizeConfig.widthMultiplier!,
         imageUrl: url,
         errorWidget: (context, string, d) => Container(
-            height: 100,
-            width: 100,
+            height: 14.7 * SizeConfig.heightMultiplier!,
+            width: 24.3 * SizeConfig.widthMultiplier!,
             decoration: BoxDecoration(
               color: Colors.grey,
             ),

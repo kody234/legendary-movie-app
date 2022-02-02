@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/widgets/circle_avatar.dart';
 
+import '../size_config.dart';
+
 class CastGrid extends StatelessWidget {
   const CastGrid({
     Key? key,
@@ -22,7 +24,9 @@ class CastGrid extends StatelessWidget {
         physics: NeverScrollableScrollPhysics(),
         itemCount: length(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, mainAxisSpacing: 30, crossAxisSpacing: 10),
+            crossAxisCount: 3,
+            mainAxisSpacing: 7.3 * SizeConfig.widthMultiplier!,
+            crossAxisSpacing: 1.5 * SizeConfig.textMultiplier!),
         itemBuilder: (context, index) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,17 +39,14 @@ class CastGrid extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  snapshot.data![index]['name'] ??
-                      snapshot.data![index]['original_name'],
-                  overflow: TextOverflow.fade,
-                  style: Theme.of(context).textTheme.headline1
-                ),
+                    snapshot.data![index]['name'] ??
+                        snapshot.data![index]['original_name'],
+                    overflow: TextOverflow.fade,
+                    style: Theme.of(context).textTheme.headline1),
               ),
               Expanded(
-                child: Text(
-                  snapshot.data![index]['character'],
-                  style: Theme.of(context).textTheme.headline1
-                ),
+                child: Text(snapshot.data![index]['character'],
+                    style: Theme.of(context).textTheme.headline1),
               ),
             ],
           );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/data/api_service.dart';
+import 'package:movie_app/size_config.dart';
 import 'package:movie_app/ui/movie_detail.dart';
 
 import '../widgets/movie_card.dart';
@@ -28,7 +29,8 @@ class _TrendingMoviesState extends State<TrendingMovies> {
           if (snapshot.hasData) {
             return Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(
+                    horizontal: 2.9 * SizeConfig.heightMultiplier!),
                 child: Scrollbar(
                   showTrackOnHover: true,
                   child: ListView.separated(
@@ -50,8 +52,8 @@ class _TrendingMoviesState extends State<TrendingMovies> {
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 20,
+                        return SizedBox(
+                          height: 2.9 * SizeConfig.heightMultiplier!,
                         );
                       },
                       itemCount: snapshot.data!.length),
